@@ -14,7 +14,7 @@ function addAnimal(name, fee) {
 function getAdoptionFee(animalName) {
     let index = animals.indexOf(animalName);
     if (index === -1) {
-        throw new Error("Animal not found in records.");
+        throw new Error("Animal not found, please try again.");
     }
     return fees[index];
 }
@@ -27,8 +27,8 @@ while (true) {
         console.log("Goodbye!");
         break;
     } else if (action === "add") {
-        let animal = readlineSync.question("Enter the animal's name: ");
-        let fee = Number(readlineSync.question("Enter the adoption fee: "));
+        let animal = readlineSync.question("Please enter the animal's name: ");
+        let fee = Number(readlineSync.question("Please also enter the adoption fee: "));
         if (!animal) {
             console.log("Animal name cannot be blank.");
         }
@@ -37,15 +37,15 @@ while (true) {
         }
         try {
             addAnimal(animal, fee);
-            console.log(`${animal} added with a fee of ${fee}.`);
+            console.log(`Your ${animal} has been added for ${fee} monies.`);
         } catch (err) {
             console.log(err.message);
         }
     } else if (action === "fee") {
-        let animal = readlineSync.question("Enter the animal's name to find its adoption fee: ");
+        let animal = readlineSync.question("Please enter the animal's name to find its adoption fee: ");
         try {
             let fee = getAdoptionFee(animal);
-            console.log(`${animal}'s adoption fee is ${fee}.`);
+            console.log(`${animal}'s adoption fee is ${fee} monies.`);
         } catch (err) {
             console.log(err.message);
         }
