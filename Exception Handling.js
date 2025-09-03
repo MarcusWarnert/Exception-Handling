@@ -16,11 +16,14 @@ and the program continues running as intended.
 
  Will need to import  install readline-sync if not done so already within project dir npm install readline-sync
 */
- const readlineSync = require('readline-sync');
+
+const readlineSync = require('readline-sync');
 
 // Initial Code with Bugs (modified to use readline-sync)
- let animals = [];
+
+let animals = [];
 let fees = [];
+
 function addAnimal(name, fee) {
     if (!name || fee < 0) {
         throw new Error("Invalid animal name or adoption fee!");
@@ -28,6 +31,7 @@ function addAnimal(name, fee) {
     animals.push(name);
     fees.push(fee);
 }
+
 function getAdoptionFee(animalName) {
     let index = animals.indexOf(animalName);
     if (index === -1) {
@@ -37,16 +41,20 @@ function getAdoptionFee(animalName) {
 }
 
 // Main program
+
 console.log("Welcome to the Pet Shelter System");
 while (true) {
-    let action = readlineSync.question("Choose an action 'add', 'fee', or 'exit': ").toLowerCase();
+    let action = readlineSync.question("Choose an action ('add', 'fee', or 'exit'): ").toLowerCase();
     if (action === "exit") {
         console.log("Goodbye!");
         break;
-    }
-    if (action === "add") {
+    } else if (action === "add") {
         let animal = readlineSync.question("Enter the animal's name: ");
         let fee = Number(readlineSync.question("Enter the adoption fee: "));
+        if (!animal) {
+            console.log("Animal name cannot be blank.");
+            continue;
+        }
         if (isNaN(fee) || fee < 0) {
             console.log("Please enter a valid, non-negative number for the fee.");
             continue;
@@ -55,17 +63,18 @@ while (true) {
             addAnimal(animal, fee);
             console.log(`${animal} added with a fee of $${fee}.`);
         } catch (err) {
-            console.log("There is an error with your animal name or adoption fee.");
+            console.log(err.message);
         }
     } else if (action === "fee") {
         let animal = readlineSync.question("Enter the animal's name to find its adoption fee: ");
         try {
-            console.log(`${animal}'s adoption fee is $${getAdoptionFee(animal)}.`);
+            let fee = getAdoptionFee(animal);
+            console.log(`${animal}'s adoption fee is $${fee}.`);
         } catch (err) {
             console.log(err.message);
         }
     } else {
-        console.log("Invalid action. Please choose 'add', 'fee', or 'exit'. ");
+        console.log("Invalid action. Please choose 'add', 'fee', or 'exit'.");
     }
 }
 
