@@ -1,7 +1,5 @@
 const readlineSync = require('readline-sync');
 
-// Initial Code with Bugs (modified to use readline-sync)
-
 let animals = [];
 let fees = [];
 
@@ -21,9 +19,8 @@ function getAdoptionFee(animalName) {
     return fees[index];
 }
 
-// Main program
 
-console.log("Welcome to the Pet Shelter System.");
+console.log("Welcome to the Cool Awesome Pet Shelter System.");
 while (true) {
     let action = readlineSync.question("Choose an action ('add', 'fee', or 'exit'): ").toLowerCase();
     if (action === "exit") {
@@ -34,11 +31,9 @@ while (true) {
         let fee = Number(readlineSync.question("Enter the adoption fee: "));
         if (!animal) {
             console.log("Animal name cannot be blank.");
-            continue;
         }
         if (isNaN(fee) || fee < 0) {
             console.log("Please enter a valid number for the fee.");
-            continue;
         }
         try {
             addAnimal(animal, fee);
@@ -58,14 +53,3 @@ while (true) {
         console.log("Invalid action. Please choose 'add', 'fee', or 'exit'.");
     }
 }
-
-/*
-Problems to Solve
-Invalid Input Errors
-  What happens if the user provides a negative adoption fee or leaves the name blank
-  What happens if the user tries to find the fee for an animal that hasn’t been added
-Code Flow Problems
-  What happens if the program throws an exception Does the rest of the code continue running
-Structured Exception Handling
-  Add trycatch blocks to handle the above errors gracefully.
-*/
