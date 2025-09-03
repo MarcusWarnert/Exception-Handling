@@ -26,7 +26,7 @@ let fees = [];
 
 function addAnimal(name, fee) {
     if (!name || fee < 0) {
-        throw new Error("Invalid animal name or adoption fee!");
+        throw new Error("Invalid animal name or adoption fee.");
     }
     animals.push(name);
     fees.push(fee);
@@ -35,14 +35,14 @@ function addAnimal(name, fee) {
 function getAdoptionFee(animalName) {
     let index = animals.indexOf(animalName);
     if (index === -1) {
-        throw new Error("Animal not found in records!");
+        throw new Error("Animal not found in records.");
     }
     return fees[index];
 }
 
 // Main program
 
-console.log("Welcome to the Pet Shelter System");
+console.log("Welcome to the Pet Shelter System.");
 while (true) {
     let action = readlineSync.question("Choose an action ('add', 'fee', or 'exit'): ").toLowerCase();
     if (action === "exit") {
@@ -56,12 +56,12 @@ while (true) {
             continue;
         }
         if (isNaN(fee) || fee < 0) {
-            console.log("Please enter a valid, non-negative number for the fee.");
+            console.log("Please enter a valid number for the fee.");
             continue;
         }
         try {
             addAnimal(animal, fee);
-            console.log(`${animal} added with a fee of $${fee}.`);
+            console.log(`${animal} added with a fee of ${fee}.`);
         } catch (err) {
             console.log(err.message);
         }
@@ -69,7 +69,7 @@ while (true) {
         let animal = readlineSync.question("Enter the animal's name to find its adoption fee: ");
         try {
             let fee = getAdoptionFee(animal);
-            console.log(`${animal}'s adoption fee is $${fee}.`);
+            console.log(`${animal}'s adoption fee is ${fee}.`);
         } catch (err) {
             console.log(err.message);
         }
